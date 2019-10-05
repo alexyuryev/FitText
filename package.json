@@ -32,5 +32,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-addons-perf": "^0.14.18",
+    "react-addons-perf": "latest"
   }
 }

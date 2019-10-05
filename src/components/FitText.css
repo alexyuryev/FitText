@@ -1,0 +1,28 @@
+.fit-text {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.fit-text--overflow {
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+}
+
+.fit-text--overflow .fit-text--head {
+    display: inline-block;
+    overflow: hidden;
+}
+
+.fit-text--overflow .fit-text--tail {
+    display: inline-block;
+    text-align: right;
+}
+
+.fit-text--ellipses {
+    display: none;
+}
+
+.fit-text--overflow .fit-text--ellipses {
+    display: inline-block;
+}
