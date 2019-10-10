@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b6f9cd2-6c29-4cac-b7ca-328d04cb9195" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FitText.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/FitText.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/docs/email.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test-data/lyrics.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PerfTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FitText.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FitText.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FitText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FitText.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/docs/email.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/email.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test-data/lyrics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/test-data/text.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +30,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="WARN_ABOUT_CRLF" value="false" />
   </component>
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
@@ -59,6 +55,12 @@
     <property name="settings.editor.selected.configurable" value="fileTemplates" />
     <property name="ts.external.directory.path" value="C:\Users\a.yuryev\WebstormProjects\fit-text\node_modules\typescript\lib" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\a.yuryev\WebstormProjects\fit-text\src" />
+      <recent name="C:\Users\a.yuryev\WebstormProjects\fit-text\src\components" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -71,8 +73,19 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.npm start">
+  <component name="RunManager" selected="npm.build -- --mode=production">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="build -- --mode=production" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <arguments value="-- --mode=production" />
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="npm start" type="js.build_tools.npm">
@@ -85,6 +98,11 @@
       <envs />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="JavaScript Debug.Debug Application" />
+      <item itemvalue="npm.build -- --mode=production" />
+      <item itemvalue="npm.npm start" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -97,8 +115,21 @@
       <option name="presentableId" value="Default" />
       <updated>1570269420061</updated>
       <workItem from="1570269421335" duration="8018000" />
-      <workItem from="1570283724444" duration="6317000" />
+      <workItem from="1570283724444" duration="7149000" />
+      <workItem from="1570473943190" duration="2703000" />
+      <workItem from="1570520930553" duration="98000" />
+      <workItem from="1570562309379" duration="1547000" />
+      <workItem from="1570613052793" duration="7883000" />
+      <workItem from="1570693888918" duration="2870000" />
     </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1570290250619</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1570290250619</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,5 +147,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init" />
+    <option name="LAST_COMMIT_MESSAGE" value="init" />
   </component>
 </project>

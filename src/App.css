@@ -12,7 +12,10 @@ table.lyrics-translation {
 }
 
 .fixed-width-container {
-  border: 1px solid black;
+  box-sizing: border-box;
+  margin: 2px 4px;
+  border: 2px dashed darkred;
+  padding: 2px 4px;
 }
 
 .width-micro {
@@ -41,4 +44,11 @@ table.lyrics-translation {
 
 .column {
   flex: 50%;
+}
+
+.full-box-model {
+  box-sizing: border-box;
+  margin: 2px 4px;
+  border: 2px dashed orangered;
+  padding: 2px 4px;
 }
