@@ -1,23 +1,26 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
-import { longSentence, normalSentence, shortSentence, sourceStrings, translatedStrings } from './test-data/text';
+import {longSentence, normalSentence, shortSentence, sourceStrings, translatedStrings} from './test-data/text';
 import FitText from "./components/FitText";
-import { PerfTable, TwoTextFieldsRecord } from "./PerfTable";
+import {PerfTable, TwoTextFieldsRecord} from "./PerfTable";
 
 const rowsCount = 2000;
+const newRecordsCountPerGeneration = 150;
 
-function getRandomRecords(count: number) {
-    const offset = Math.floor(count * Math.random());
-
+function getRandomRecords(generation: number, count: number) {
+    const offset = generation * newRecordsCountPerGeneration;
+    const contentMutation = Math.floor(Math.random() * 1000000000).toString();
     return Array.from(
         Array(count).keys(),
         (_v, j: number) => {
             const i = j + offset;
+            const indexInSource = i % sourceStrings.length;
+            const repeatValue = Math.floor(i / sourceStrings.length);
 
             return {
-                id: offset.toString() + '-' + j.toString(), // TODO: id меняется?
-                column1: sourceStrings[i % sourceStrings.length],
-                column2: translatedStrings[i % translatedStrings.length],
+                id: `${indexInSource.toString()}-${repeatValue.toString()}`,
+                column1: contentMutation + ' ' + sourceStrings[indexInSource],
+                column2: contentMutation + ' ' + translatedStrings[indexInSource],
             }
         }
     )
@@ -30,68 +33,111 @@ interface AppState {
 interface AppProps {
 }
 
+function getInstancesForTailLength() {
+    const tailLength = 5;
+    return <>
+        <h1>{tailLength}</h1>
+        <p>{normalSentence}</p>
+        <div className="fixed-width-container width-very-long">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={normalSentence}>{normalSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-long">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={normalSentence}>{normalSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-normal">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={normalSentence}>{normalSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-short">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={normalSentence}>{normalSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-micro">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={normalSentence}>{normalSentence}</FitText>
+        </div>
+
+        <p>{longSentence}</p>
+        <div className="fixed-width-container width-very-long">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={longSentence}>{longSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-long">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={longSentence}>{longSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-normal">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={longSentence}>{longSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-short">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={longSentence}>{longSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-micro">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={longSentence}>{longSentence}</FitText>
+        </div>
+
+        <p>{shortSentence}</p>
+        <div className="fixed-width-container width-very-long">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={shortSentence}>{shortSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-long">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={shortSentence}>{shortSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-normal">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={shortSentence}>{shortSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-short">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={shortSentence}>{shortSentence}</FitText>
+        </div>
+        <div className="fixed-width-container width-micro">
+            <FitText className="full-box-model"
+                     tailLength={tailLength}
+                     title={shortSentence}>{shortSentence}</FitText>
+        </div>
+    </>;
+}
+
 export class App extends React.Component<AppProps, AppState> {
+    private generation = 0;
+
     constructor(props: AppProps) {
         super(props);
         this.updateTableContent = this.updateTableContent.bind(this);
         this.state = {
-            records:  getRandomRecords(rowsCount)
+            records: getRandomRecords(this.generation, rowsCount)
         }
     }
 
     render() {
-        function getInstancesForTailLength(fo: boolean) {
-            const tailLength = 5;
-            return <>
-                <h1>{tailLength}</h1>
-                <p>{normalSentence}</p>
-                <div className="fixed-width-container width-very-long"><FitText className="full-box-model"
-                                                                                tailLength={tailLength} forceOverflow={fo}>{normalSentence}</FitText></div>
-                <div className="fixed-width-container width-long"><FitText className="full-box-model"
-                                                                           tailLength={tailLength} forceOverflow={fo}>{normalSentence}</FitText></div>
-                <div className="fixed-width-container width-normal"><FitText className="full-box-model"
-                                                                             tailLength={tailLength} forceOverflow={fo}>{normalSentence}</FitText></div>
-                <div className="fixed-width-container width-short"><FitText className="full-box-model"
-                                                                            tailLength={tailLength} forceOverflow={fo}>{normalSentence}</FitText></div>
-                <div className="fixed-width-container width-micro"><FitText className="full-box-model"
-                                                                            tailLength={tailLength} forceOverflow={fo}>{normalSentence}</FitText></div>
-
-                <p>{longSentence}</p>
-                <div className="fixed-width-container width-very-long"><FitText className="full-box-model"
-                                                                                tailLength={tailLength} forceOverflow={fo}>{longSentence}</FitText></div>
-                <div className="fixed-width-container width-long"><FitText className="full-box-model" tailLength={tailLength}
-                                                                           forceOverflow={fo}>{longSentence}</FitText>
-                </div>
-                <div className="fixed-width-container width-normal"><FitText className="full-box-model"
-                                                                             tailLength={tailLength} forceOverflow={fo}>{longSentence}</FitText></div>
-                <div className="fixed-width-container width-short"><FitText className="full-box-model" tailLength={tailLength}
-                                                                            forceOverflow={fo}>{longSentence}</FitText>
-                </div>
-                <div className="fixed-width-container width-micro"><FitText className="full-box-model" tailLength={tailLength}
-                                                                            forceOverflow={fo}>{longSentence}</FitText>
-                </div>
-
-                <p>{shortSentence}</p>
-                <div className="fixed-width-container width-very-long"><FitText className="full-box-model"
-                                                                                tailLength={tailLength} forceOverflow={fo}>{shortSentence}</FitText></div>
-                <div className="fixed-width-container width-long"><FitText className="full-box-model" tailLength={tailLength}
-                                                                           forceOverflow={fo}>{shortSentence}</FitText>
-                </div>
-                <div className="fixed-width-container width-normal"><FitText className="full-box-model"
-                                                                             tailLength={tailLength} forceOverflow={fo}>{shortSentence}</FitText></div>
-                <div className="fixed-width-container width-short"><FitText className="full-box-model"
-                                                                            tailLength={tailLength} forceOverflow={fo}>{shortSentence}</FitText></div>
-                <div className="fixed-width-container width-micro"><FitText className="full-box-model"
-                                                                            tailLength={tailLength} forceOverflow={fo}>{shortSentence}</FitText></div>
-            </>;
-        }
-
         return (
             <div className="App">
-                <div className="row">
-                    <div className="column">{getInstancesForTailLength(false)}</div>
-                    <div className="column">{getInstancesForTailLength(false)}</div>
-                </div>
+                {/*<div className="row">
+                    <div className="column">{getInstancesForTailLength()}</div>
+                    <div className="column">{getInstancesForTailLength()}</div>
+                </div>*/}
 
                 <p>Таблица</p>
                 <button onClick={this.updateTableContent}>Update table</button>
@@ -102,8 +148,9 @@ export class App extends React.Component<AppProps, AppState> {
     }
 
     updateTableContent() {
+        this.generation += 1;
         this.setState<"records">({
-            records: getRandomRecords(rowsCount)
+            records: getRandomRecords(this.generation, rowsCount)
         });
     }
 }

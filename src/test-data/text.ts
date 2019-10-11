@@ -1,4 +1,28 @@
-const sourceText = "Mama, just killed a man\n" +
+const sourceText =
+    "Ever felt away with me\n" +
+    "Just once that all I need\n" +
+    "Entwined in finding you one day\n" +
+    "Ever felt away without me\n" +
+    "My love, it lies so deep\n" +
+    "Ever dream of me\n" +
+    "Would you do it with me\n" +
+    "Heal the scars and change the stars\n" +
+    "Would you do it for me\n" +
+    "Turn loose the heaven within\n" +
+    "I'd take you away\n" +
+    "Castaway on a lonely day\n" +
+    "Bosom for a teary cheek\n" +
+    "My song can but borrow your grace\n" +
+    "Come out, come out wherever you are\n" +
+    "So lost in your sea\n" +
+    "Give in, give in for my touch\n" +
+    "For my taste for my lust\n" +
+    "Your beauty cascaded on me\n" +
+    "In this white night fantasy\n" +
+    "All I ever craved were the two dreams I shared with you.\n" +
+    "One I now have, will the other one ever dream remain.\n" +
+    "For yours I truly wish to be.\n" +
+    "Mama, just killed a man\n" +
     "Put a gun against his head\n" +
     "Pulled my trigger, now he's dead\n" +
     "Mama, life had just begun\n" +
@@ -211,7 +235,32 @@ const sourceText = "Mama, just killed a man\n" +
     "And they'll meet one day far away\n" +
     "And say, 'I wish I knew you, I wish I knew you before";
 
-const translatedText = "Мама, только что убил человека\n" +
+
+const translatedText =
+    "Ощутив, что ты далеко от меня \n" +
+    "У меня возникло только одно желание \n" +
+    "Обрести тебя однажды. \n" +
+    "Когда-нибудь вдали от  меня,\n" +
+    "Ощутив, как сильно я тебя люблю, \n" +
+    "Помечтай обо мне. \n" +
+    "Сделаешь ли ты это\n" +
+    "Вылечишь мои раны и поменяешься со мной ролями? \n" +
+    "Сделаешь ли ты это для меня? \n" +
+    "Откроешь ли небеса? \n" +
+    "Я хочу тебя забрать, \n" +
+    "Брошенный в одиноком дне, \n" +
+    "Высуши дорожки слез \n" +
+    "Но моей песне довольно твоего изящества. \n" +
+    "Приди же, где бы ты ни была, \n" +
+    "Потерянная в своем море. \n" +
+    "Отдайся моим ласкам, \n" +
+    "Моим пристрастиям, моему желанию. \n" +
+    "Твоя красота сразила меня. \n" +
+    "В этой фантазии белой ночи. \n" +
+    "Все, что я когда-либо хотел – это две мечты и я поделился ими с тобой.\n" +
+    "Одна из них сбылась, а вторая пусть навечно будет мечтой\n" +
+    "Быть твоим всем сердцем.\n" +
+    "Мама, только что убил человека\n" +
     "Приставь пистолет к его голове\n" +
     "Нажал на курок, теперь он мертв.\n" +
     "Мама, жизнь только началась\n" +

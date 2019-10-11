@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import './FitText.css';
 
 interface FitTextProps {
+    children: string,
     tailLength: number,
     title?: string,
-    className?: string,
-    forceOverflow: boolean,
+    className?: string
 }
 
 export class FitText extends Component<FitTextProps> {
@@ -17,7 +17,7 @@ export class FitText extends Component<FitTextProps> {
     render() {
         const { title, children, className, tailLength } = this.props;
         const text = children as String;
-        const hasTail = text.length > tailLength;
+        const hasTail = text.length > tailLength; //TODO:
         const tail = text.slice(-tailLength);
         const head = text.slice(0, text.length - tailLength);
 
@@ -26,11 +26,17 @@ export class FitText extends Component<FitTextProps> {
                 <span className='fit-text--head'>{head}</span>
                 <span className='fit-text--ellipses'>…</span>
                 <span className='fit-text--tail'>{tail}</span>
-            </span>);
+            </span>
+            );
     }
 
     componentDidMount() {
         this.updateOverflow();
+        /*<span className={className + ' fit-text'} title={title} ref={this.rootRef}>
+                <span className='fit-text--head'>{head}</span>
+                <span className='fit-text--ellipses'>…</span>
+                <span className='fit-text--tail'>{tail}</span>
+            </span>*/
     }
 
     componentDidUpdate(prevProps: Readonly<FitTextProps>, prevState: Readonly<{}>, snapshot?: any): void {
@@ -52,9 +58,9 @@ export class FitText extends Component<FitTextProps> {
         const contentWidth = parentElement.scrollWidth;
         const availableWidth = parentElement.clientWidth;
 
-        if (contentWidth > availableWidth) {
+       /* if (contentWidth > availableWidth) {
             rootElement.classList.add('fit-text_overflow');
-        }
+        }*/
     }
 
     private rootRef: React.RefObject<HTMLSpanElement>;

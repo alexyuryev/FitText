@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2b6f9cd2-6c29-4cac-b7ca-328d04cb9195" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/PerfTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/FitText.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FitText.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PerfTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerfTable.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FitText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FitText.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/email.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/email.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test-data/lyrics.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/test-data/text.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test-data/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/test-data/text.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,17 +41,21 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="fileTemplates" />
-    <property name="ts.external.directory.path" value="C:\Users\a.yuryev\WebstormProjects\fit-text\node_modules\typescript\lib" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="ts.external.directory.path" value="D:\fit-text\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -73,7 +75,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="npm.build -- --mode=production">
+  <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
       <method v="2" />
     </configuration>
@@ -121,6 +123,7 @@
       <workItem from="1570562309379" duration="1547000" />
       <workItem from="1570613052793" duration="7883000" />
       <workItem from="1570693888918" duration="2870000" />
+      <workItem from="1570787514461" duration="7261000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1570290250619</created>

@@ -19,13 +19,13 @@ export class PerfTable extends React.Component<PerfTableProps> {
 				<td>{v.id}</td>
 				<td><FitText
 					className="full-box-model"
-					forceOverflow={true}
-					tailLength={5}>{v.column1}
+					tailLength={5}
+					title={'full:' + v.column1}>{v.column1}
 				</FitText></td>
 				<td><FitText
 					className="full-box-model"
-					forceOverflow={false}
-					tailLength={5}>{v.column2}
+					tailLength={5}
+					title={'full:' + v.column2}>{v.column2}
 				</FitText></td>
 			</tr></tbody>
 			)
@@ -47,5 +47,16 @@ export class PerfTable extends React.Component<PerfTableProps> {
 		console.log(performance.getEntriesByType("measure")[0].duration);
 		performance.clearMarks();
 		performance.clearMeasures();*/
+	}
+
+	UNSAFE_componentWillUpdate() {
+		window.performance.mark('PerfTableUpdate')
+	}
+
+	componentDidUpdate(prevProps: Readonly<PerfTableProps>, prevState: Readonly<{}>, snapshot?: any): void {
+		performance.measure("update", 'PerfTableUpdate');
+		console.log('update time:', performance.getEntriesByType("measure")[0].duration);
+		performance.clearMarks();
+		performance.clearMeasures();
 	}
 }
