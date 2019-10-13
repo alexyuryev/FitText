@@ -1,25 +1,31 @@
 .fit-text {
+    display: inline-block;
     width: 100%;
     white-space: nowrap;
+}
+
+.fit-text .fit-text--measure {
+    position: absolute;
+    visibility: hidden;
 }
 
 .fit-text--ellipses {
     display: none;
 }
 
-.fit-text_overflow {
+.fit-text.fit-text_overflow {
     display: flex;
     justify-content: flex-end;
     overflow: hidden;
 }
 
 .fit-text_overflow .fit-text--head {
-
+    display: inline-block;
+    overflow: hidden;
 }
 
-
-.fit-text_overflow .fit-text--head {
-    overflow: hidden;
+.fit-text_overflow .fit-text--ellipses {
+    display: unset;
 }
 
 /*.fit-text_overflow .fit-text--head {
@@ -43,6 +49,3 @@
 }
 */
 
-.fit-text_overflow .fit-text--ellipses {
-    display: unset;
-}

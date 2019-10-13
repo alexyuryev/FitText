@@ -5,11 +5,11 @@ import FitText from "./components/FitText";
 import {PerfTable, TwoTextFieldsRecord} from "./PerfTable";
 
 const rowsCount = 2000;
-const newRecordsCountPerGeneration = 150;
+const newRecordsCountPerGeneration = 0;
 
 function getRandomRecords(generation: number, count: number) {
     const offset = generation * newRecordsCountPerGeneration;
-    const contentMutation = Math.floor(Math.random() * 1000000000).toString();
+    const contentMutation = Math.floor(Math.pow(10,Math.random() * 20)).toString();
     return Array.from(
         Array(count).keys(),
         (_v, j: number) => {
@@ -33,7 +33,9 @@ interface AppState {
 interface AppProps {
 }
 
-function getInstancesForTailLength() {
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+/*function getInstancesForTailLength() {
     const tailLength = 5;
     return <>
         <h1>{tailLength}</h1>
@@ -118,7 +120,7 @@ function getInstancesForTailLength() {
                      title={shortSentence}>{shortSentence}</FitText>
         </div>
     </>;
-}
+}*/
 
 export class App extends React.Component<AppProps, AppState> {
     private generation = 0;

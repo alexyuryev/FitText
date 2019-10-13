@@ -1,69 +1,68 @@
-import React, { Component } from "react";
+import React, {useRef, useState} from "react";
 import './FitText.css';
 
 interface FitTextProps {
     children: string,
     tailLength: number,
     title?: string,
-    className?: string
+    className?: string,
+    logId: string
 }
 
-export class FitText extends Component<FitTextProps> {
-    constructor(props: FitTextProps) {
-        super(props);
-        this.rootRef = React.createRef();
+const canvas = document.createElement("canvas");
+const context = canvas ? canvas.getContext("2d") : null;
+
+function measureTextWidth(text: string, fontStyleValue: string) {
+    if (!context) {
+        throw new Error('canvas API is not supported');
     }
+    context.font = fontStyleValue;
+    const metrics = context.measureText(text);
+    return metrics.width;
+}
 
-    render() {
-        const { title, children, className, tailLength } = this.props;
-        const text = children as String;
-        const hasTail = text.length > tailLength; //TODO:
-        const tail = text.slice(-tailLength);
-        const head = text.slice(0, text.length - tailLength);
+function getStyle(element: HTMLElement, style: string) {
+    return window.getComputedStyle(element, null).getPropertyValue(style);
+}
 
-        return (
-            <span className={className + ' fit-text'} title={title} ref={this.rootRef}>
+export const FitText: React.FC<FitTextProps> = (props: FitTextProps) => {
+    const rootRef = useRef<HTMLSpanElement>(null);
+    const boxWidthRef = useRef<number>(0);
+    const [hasOverflow, setHasOverflow] = useState<boolean>(false);
+    const {title, children: text, className, tailLength} = props;
+
+    React.useLayoutEffect(() => {
+        if (!rootRef.current) {
+            throw new Error('no root element ref');
+        }
+
+        // Размер контейнера может меняться. Мониторинг и распространение такого события по дереву компонентов оставляем за рамками
+        // данного компонента - это вопрос архитектуры всей страницы.
+        if (!boxWidthRef.current) {
+            boxWidthRef.current = rootRef.current.clientWidth;
+        }
+
+        const boxWidth = boxWidthRef.current;
+
+        const fontStyleValue: string = getStyle(rootRef.current, 'font');
+        const textWidth = measureTextWidth(text, fontStyleValue);
+
+        //console.log(`layout: textWidth=${textWidth}px, boxWidth=${boxWidth} font: ${fontStyleValue}`);
+
+        setHasOverflow(textWidth > boxWidth);
+    }, [text, className]);
+
+    const tail = text.slice(-tailLength);
+    const head = text.slice(0, text.length - tailLength);
+
+    return (
+        <span className={className + ' fit-text ' + (hasOverflow ? 'fit-text_overflow' : '')}
+              title={title} ref={rootRef}>
                 <span className='fit-text--head'>{head}</span>
                 <span className='fit-text--ellipses'>…</span>
                 <span className='fit-text--tail'>{tail}</span>
             </span>
-            );
-    }
-
-    componentDidMount() {
-        this.updateOverflow();
-        /*<span className={className + ' fit-text'} title={title} ref={this.rootRef}>
-                <span className='fit-text--head'>{head}</span>
-                <span className='fit-text--ellipses'>…</span>
-                <span className='fit-text--tail'>{tail}</span>
-            </span>*/
-    }
-
-    componentDidUpdate(prevProps: Readonly<FitTextProps>, prevState: Readonly<{}>, snapshot?: any): void {
-        this.updateOverflow();
-    }
-
-    private updateOverflow() {
-        const rootElement = this.rootRef.current;
-
-        if (!rootElement) {
-            throw new Error('no root element')
-        }
-
-        if (!rootElement.parentElement) {
-            throw new Error('no parent element')
-        }
-
-        const parentElement = rootElement.parentElement;
-        const contentWidth = parentElement.scrollWidth;
-        const availableWidth = parentElement.clientWidth;
-
-       /* if (contentWidth > availableWidth) {
-            rootElement.classList.add('fit-text_overflow');
-        }*/
-    }
-
-    private rootRef: React.RefObject<HTMLSpanElement>;
-}
+    );
+};
 
 export default FitText;

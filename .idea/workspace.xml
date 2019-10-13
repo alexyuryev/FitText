@@ -5,9 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PerfTable.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/PerfTable.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/FitText.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FitText.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FitText.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FitText.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/docs/email.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/docs/email.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test-data/text.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/test-data/text.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +97,9 @@
         <script value="start" />
       </scripts>
       <node-interpreter value="project" />
-      <envs />
+      <envs>
+        <env name="GENERATE_SOURCEMAP" value="false" />
+      </envs>
       <method v="2" />
     </configuration>
     <list>
@@ -123,7 +125,14 @@
       <workItem from="1570562309379" duration="1547000" />
       <workItem from="1570613052793" duration="7883000" />
       <workItem from="1570693888918" duration="2870000" />
-      <workItem from="1570787514461" duration="7261000" />
+      <workItem from="1570787514461" duration="15700000" />
+      <workItem from="1570866584686" duration="1431000" />
+      <workItem from="1570869507160" duration="9118000" />
+      <workItem from="1570885352952" duration="4330000" />
+      <workItem from="1570902456484" duration="3949000" />
+      <workItem from="1570906456857" duration="1101000" />
+      <workItem from="1570949559390" duration="21000" />
+      <workItem from="1570953876268" duration="4309000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1570290250619</created>
@@ -132,7 +141,14 @@
       <option name="project" value="LOCAL" />
       <updated>1570290250619</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="go js">
+      <created>1570795265486</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1570795265486</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -153,6 +169,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="init" />
-    <option name="LAST_COMMIT_MESSAGE" value="init" />
+    <MESSAGE value="go js" />
+    <option name="LAST_COMMIT_MESSAGE" value="go js" />
   </component>
 </project>
