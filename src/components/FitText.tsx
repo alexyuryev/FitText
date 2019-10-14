@@ -1,68 +1,75 @@
 import React, {useRef, useState} from "react";
 import './FitText.css';
+import {ellipses, fitTextToWidthWithTail, getFontStyleValue, getStyle, measureTextWidth} from "../utils/utils";
 
 interface FitTextProps {
     children: string,
     tailLength: number,
     title?: string,
     className?: string,
-    logId: string
-}
-
-const canvas = document.createElement("canvas");
-const context = canvas ? canvas.getContext("2d") : null;
-
-function measureTextWidth(text: string, fontStyleValue: string) {
-    if (!context) {
-        throw new Error('canvas API is not supported');
-    }
-    context.font = fontStyleValue;
-    const metrics = context.measureText(text);
-    return metrics.width;
-}
-
-function getStyle(element: HTMLElement, style: string) {
-    return window.getComputedStyle(element, null).getPropertyValue(style);
+    canCrop?: boolean // true - более производительное решение, но, в общем случае, буква перед многоточием
+    // обрезается так, что будет видна только её часть. false - честное нахождение видимой части текста
 }
 
 export const FitText: React.FC<FitTextProps> = (props: FitTextProps) => {
     const rootRef = useRef<HTMLSpanElement>(null);
-    const boxWidthRef = useRef<number>(0);
-    const [hasOverflow, setHasOverflow] = useState<boolean>(false);
-    const {title, children: text, className, tailLength} = props;
+    const clientWidthRef = useRef<number>(0);
+
+    const {title, children: text, className, tailLength, canCrop} = props;
+
+    const [adjustedText, setAdjustedText] = useState<string>(text);
+    const [overflowMode, setOverflowMode] = useState<boolean>(false);
 
     React.useLayoutEffect(() => {
+        if (tailLength === 0) {
+            setAdjustedText(text);
+            return;
+        }
+
         if (!rootRef.current) {
             throw new Error('no root element ref');
         }
 
         // Размер контейнера может меняться. Мониторинг и распространение такого события по дереву компонентов оставляем за рамками
         // данного компонента - это вопрос архитектуры всей страницы.
-        if (!boxWidthRef.current) {
-            boxWidthRef.current = rootRef.current.clientWidth;
+        if (!clientWidthRef.current) {
+            clientWidthRef.current = rootRef.current.clientWidth;
         }
 
-        const boxWidth = boxWidthRef.current;
+        const paddingStyleValue: number =
+            parseInt(getStyle(rootRef.current, 'padding-left')) +
+            parseInt(getStyle(rootRef.current, 'padding-right'));
 
-        const fontStyleValue: string = getStyle(rootRef.current, 'font');
-        const textWidth = measureTextWidth(text, fontStyleValue);
+        const fontStyleValue: string = getFontStyleValue(rootRef.current);
+        const boxWidth = clientWidthRef.current - paddingStyleValue;
 
-        //console.log(`layout: textWidth=${textWidth}px, boxWidth=${boxWidth} font: ${fontStyleValue}`);
+        if (canCrop) {
+            setOverflowMode(measureTextWidth(text, fontStyleValue) > boxWidth);
+        } else {
+            setAdjustedText(fitTextToWidthWithTail(text, fontStyleValue, boxWidth, tailLength));
+        }
+    }, [text, className, tailLength, canCrop]);
 
-        setHasOverflow(textWidth > boxWidth);
-    }, [text, className]);
+    if (canCrop && tailLength) {
+        const tail = text.slice(-tailLength);
+        const head = text.slice(0, text.length - tailLength);
 
-    const tail = text.slice(-tailLength);
-    const head = text.slice(0, text.length - tailLength);
+        return (
+            <span className={className + ' fit-text ' + (overflowMode ? 'fit-text_head-overflow' : '')}
+                  title={title} ref={rootRef}>
 
-    return (
-        <span className={className + ' fit-text ' + (hasOverflow ? 'fit-text_overflow' : '')}
-              title={title} ref={rootRef}>
                 <span className='fit-text--head'>{head}</span>
-                <span className='fit-text--ellipses'>…</span>
+                <span className='fit-text--ellipses'>{ellipses}</span>
                 <span className='fit-text--tail'>{tail}</span>
             </span>
-    );
+        )
+    } else {
+        return (
+            <span className={className + ' fit-text ' + (!tailLength ? 'fit-text_simple-overflow' : '')}
+                  title={title} ref={rootRef}>
+            {adjustedText}
+        </span>)
+    }
 };
 
 export default FitText;

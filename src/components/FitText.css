@@ -2,50 +2,27 @@
     display: inline-block;
     width: 100%;
     white-space: nowrap;
-}
-
-.fit-text .fit-text--measure {
-    position: absolute;
-    visibility: hidden;
+    overflow: hidden;
 }
 
 .fit-text--ellipses {
     display: none;
 }
 
-.fit-text.fit-text_overflow {
+.fit-text.fit-text_head-overflow {
     display: flex;
     justify-content: flex-end;
-    overflow: hidden;
 }
 
-.fit-text_overflow .fit-text--head {
+.fit-text.fit-text_simple-overflow {
+    text-overflow: ellipsis;
+}
+
+.fit-text_head-overflow .fit-text--head {
     display: inline-block;
     overflow: hidden;
 }
 
-.fit-text_overflow .fit-text--ellipses {
+.fit-text_head-overflow .fit-text--ellipses {
     display: unset;
 }
-
-/*.fit-text_overflow .fit-text--head {
-    background-image: linear-gradient(to left, rgba(0, 0, 0, 0), black);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}*/
-
-/*
-.fit-text_overflow .fit-text--head {
-    position: relative
-}
-.fit-text_overflow .fit-text--head:after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 40px;
-    height: 100%;
-    background: linear-gradient(to right, rgba(255,255,255, 0.2), white 100%);
-}
-*/
-

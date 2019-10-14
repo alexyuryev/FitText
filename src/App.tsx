@@ -1,159 +1,102 @@
 import React from 'react';
 import './App.css';
-import {longSentence, normalSentence, shortSentence, sourceStrings, translatedStrings} from './test-data/text';
+import {longSentence, normalSentence, shortSentence} from './test-data/text';
 import FitText from "./components/FitText";
 import {PerfTable, TwoTextFieldsRecord} from "./PerfTable";
+import {getRandomRecords} from "./test-data/generate";
 
 const rowsCount = 2000;
-const newRecordsCountPerGeneration = 0;
-
-function getRandomRecords(generation: number, count: number) {
-    const offset = generation * newRecordsCountPerGeneration;
-    const contentMutation = Math.floor(Math.pow(10,Math.random() * 20)).toString();
-    return Array.from(
-        Array(count).keys(),
-        (_v, j: number) => {
-            const i = j + offset;
-            const indexInSource = i % sourceStrings.length;
-            const repeatValue = Math.floor(i / sourceStrings.length);
-
-            return {
-                id: `${indexInSource.toString()}-${repeatValue.toString()}`,
-                column1: contentMutation + ' ' + sourceStrings[indexInSource],
-                column2: contentMutation + ' ' + translatedStrings[indexInSource],
-            }
-        }
-    )
-}
 
 interface AppState {
-    records: TwoTextFieldsRecord[]
+    records: TwoTextFieldsRecord[];
+    canCrop: boolean;
+    tailLength: number;
 }
 
 interface AppProps {
 }
 
+const boxSizes = ["width-very-long", "width-long", "width-normal", "width-short", "width-micro", "width-nano", "width-pico"];
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-/*function getInstancesForTailLength() {
-    const tailLength = 5;
-    return <>
+const sample = (boxSize: string, tailLength: number, text: string) => (
+    <div className={"fixed-width-container " + boxSize} key={boxSize}>
+        <FitText className="full-box-model"
+                 tailLength={tailLength}
+                 title={text}>{text}</FitText>
+    </div>
+);
+
+const getSamplesPerTailLength = (tailLength: number) => (
+    <div>
         <h1>{tailLength}</h1>
         <p>{normalSentence}</p>
-        <div className="fixed-width-container width-very-long">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={normalSentence}>{normalSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-long">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={normalSentence}>{normalSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-normal">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={normalSentence}>{normalSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-short">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={normalSentence}>{normalSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-micro">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={normalSentence}>{normalSentence}</FitText>
-        </div>
-
+        {boxSizes.map((w) => sample(w, tailLength, normalSentence))}
         <p>{longSentence}</p>
-        <div className="fixed-width-container width-very-long">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={longSentence}>{longSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-long">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={longSentence}>{longSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-normal">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={longSentence}>{longSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-short">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={longSentence}>{longSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-micro">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={longSentence}>{longSentence}</FitText>
-        </div>
-
+        {boxSizes.map((w) => sample(w, tailLength, longSentence))}
         <p>{shortSentence}</p>
-        <div className="fixed-width-container width-very-long">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={shortSentence}>{shortSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-long">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={shortSentence}>{shortSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-normal">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={shortSentence}>{shortSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-short">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={shortSentence}>{shortSentence}</FitText>
-        </div>
-        <div className="fixed-width-container width-micro">
-            <FitText className="full-box-model"
-                     tailLength={tailLength}
-                     title={shortSentence}>{shortSentence}</FitText>
-        </div>
-    </>;
-}*/
+        {boxSizes.map((w) => sample(w, tailLength, shortSentence))}
+    </div>
+);
 
 export class App extends React.Component<AppProps, AppState> {
     private generation = 0;
 
     constructor(props: AppProps) {
         super(props);
-        this.updateTableContent = this.updateTableContent.bind(this);
+        this.updateRecords = this.updateRecords.bind(this);
+        this.toggleCrop = this.toggleCrop.bind(this);
+        this.switchTailLength = this.switchTailLength.bind(this);
         this.state = {
-            records: getRandomRecords(this.generation, rowsCount)
+            records: getRandomRecords(this.generation, rowsCount),
+            canCrop: false,
+            tailLength: 0
         }
     }
 
     render() {
         return (
             <div className="App">
-                {/*<div className="row">
-                    <div className="column">{getInstancesForTailLength()}</div>
-                    <div className="column">{getInstancesForTailLength()}</div>
-                </div>*/}
+                <h1>FitText test page</h1>
+                {<div className="row">
+                    <div className="column">{getSamplesPerTailLength(0)}</div>
+                    <div className="column">{getSamplesPerTailLength(1)}</div>
+                    <div className="column">{getSamplesPerTailLength(3)}</div>
+                    <div className="column">{getSamplesPerTailLength(5)}</div>
+                    <div className="column">{getSamplesPerTailLength(10)}</div>
+                </div>}
 
                 <p>Таблица</p>
-                <button onClick={this.updateTableContent}>Update table</button>
 
-                <PerfTable records={this.state.records}/>
+                {<div className="row">
+                    <div className="column">
+                        <h1>{rowsCount} rows, canCrop={this.state.canCrop ? 'true' : 'false'}, tailLength={this.state.tailLength}</h1>
+                        <button onClick={this.updateRecords}>Update table</button>
+                        <button onClick={this.toggleCrop}>Toggle cropMode</button>
+                        <button onClick={this.switchTailLength}>Switch tailLength</button>
+                        <PerfTable records={this.state.records} tailLength={this.state.tailLength} canCrop={this.state.canCrop} name="full"/>
+                    </div>
+                </div>}
             </div>
         );
     }
 
-    updateTableContent() {
+    updateRecords() {
         this.generation += 1;
-        this.setState<"records">({
+        this.setState({
             records: getRandomRecords(this.generation, rowsCount)
         });
+    }
+
+    toggleCrop() {
+        this.setState((s) => ({
+            canCrop: !s.canCrop
+        }));
+    }
+
+    switchTailLength() {
+        this.setState((s) => ({
+            tailLength: s.tailLength + 2
+        }));
     }
 }
 

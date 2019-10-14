@@ -1,9 +1,13 @@
+body {
+  margin: 20px;
+}
+
 table {
   border-collapse: collapse;
 }
 
 table, th, td {
-  border: 1px solid black;
+  border: 1px solid gray;
 }
 
 table.lyrics-translation {
@@ -14,12 +18,20 @@ table.lyrics-translation {
 .fixed-width-container {
   box-sizing: border-box;
   margin: 2px 4px;
-  border: 2px dashed darkred;
+  border: 2px solid lightseagreen;
   padding: 2px 4px;
 }
 
-.width-micro {
+.width-pico {
+  width: 40px;
+}
+
+.width-nano {
   width: 50px;
+}
+
+.width-micro {
+  width: 60px;
 }
 
 .width-short {
@@ -48,7 +60,5 @@ table.lyrics-translation {
 
 .full-box-model {
   box-sizing: border-box;
-  margin: 2px 4px;
-  border: 2px dashed orangered;
   padding: 2px 4px;
 }
