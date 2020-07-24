@@ -1,3 +1,6 @@
+React component for text fitting into contaner's width like this: 'abcdef...z'
+With performance demo table
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
